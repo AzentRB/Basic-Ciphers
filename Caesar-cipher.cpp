@@ -1,3 +1,14 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize("unroll-loops")
+#include <bits/stdc++.h> 
+#include <complex>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <list>
+#include <chrono>
+#include <random>
 #include <iostream>
 #include <algorithm>
 #include <cmath>
@@ -44,10 +55,14 @@ double eps = 1e-12;
 void solve(){
     int shift,temp,lol;
     char message[100];
+    cout << "Please enter message to encrypt: ";
+    cin.getline(message, sizeof(message));
     cout << "Thank you, now enter the value of char shift: ";
     cin >> shift;
     bool flag = false;
     for (int x=0;x<strlen(message);x++) {
+        if(int(message[x])+shift>122) temp=int(message[x])+shift,lol=temp-122,message[x]=97+lol-1,flag=true;
+        if(int(message[x])<=90) if(int(message[x]+shift>90)) temp=int(message[x])+shift,lol=temp-90,message[x]=65+lol-1,flag=true;
         if(message[x]==32) continue;
         if(!flag) message[x] += shift;
         flag=false;

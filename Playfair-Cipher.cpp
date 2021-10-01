@@ -3,6 +3,16 @@
 #pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h> 
 #include <complex>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <list>
+#include <chrono>
+#include <random>
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <string>
 #include <vector>
 #include <map>
 #include <unordered_map>
@@ -52,6 +62,8 @@ vector< vector<char> > cim(string key){
                 break;
             }
     for(int i=0;i<25;i++) if(letter_list[i]!='-') result_list.push_back(letter_list[i]);
+    vector< vector<char> > matrix;
+    vector<char> temp_vector;
     for(int i=0;i<result_list.size();i++){
         temp_vector.push_back(result_list[i]);
         if((i+1)%5==0) matrix.push_back(temp_vector),temp_vector.clear();
@@ -62,6 +74,11 @@ string cide(string input, bool mode, vector< vector<char> > matrix ){
     string output,init;
     char first=input[0],second=input[1];
     int fr=0,fc=0,sr=0,sc=0;
+    for(int i=0;i<5;i++)
+        for(int j=0;j<5;j++){
+            if(first==matrix[i][j]) fr=i,fc=j;
+            if(second==matrix[i][j]) sr=i,sc=j;
+        }
     if(fr==sr)
     {
         if(mode==true) output=init+matrix[fr][srd(fc)]+matrix[sr][srd(sc)];        
@@ -88,6 +105,9 @@ void solve(){
     input=temp_str;
     temp_str="";
     for(int i=0;i<key.length();i++) if(key[i]!=' ') temp_str+=key[i];
+    key=temp_str;
+    if((input.length()%2)==1) input+="x";
+    vector< vector<char> > matrix=cim(key);
     while(true){
         if(input.length()==1) process_pair=input+"x";
         else{

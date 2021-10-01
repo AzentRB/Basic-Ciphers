@@ -8,6 +8,11 @@
 #include <unordered_set>
 #include <list>
 #include <chrono>
+#include <random>
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <string>
 #include <vector>
 #include <map>
 #include <unordered_map>
@@ -57,6 +62,8 @@ class Substitution{
             m1.insert(pair<char,char>('d','W')),m1.insert(pair<char,char>('e','V')),m1.insert(pair<char,char>('f','U'));
             m1.insert(pair<char,char>('g','T')),m1.insert(pair<char,char>('h','S')),m1.insert(pair<char,char>('i','R'));
             m1.insert(pair<char,char>('j','Q')),m1.insert(pair<char,char>('k','P')),m1.insert(pair<char,char>('l','O'));
+            m1.insert(pair<char,char>('m','N')),m1.insert(pair<char,char>('n','M')),m1.insert(pair<char,char>('o','L'));
+            m1.insert(pair<char,char>('p','K')),m1.insert(pair<char,char>('q','J')),m1.insert(pair<char,char>('r','I'));
             m1.insert(pair<char,char>('s','H')),m1.insert(pair<char,char>('t','G')),m1.insert(pair<char,char>('u','F'));
             m1.insert(pair<char,char>('v','E')),m1.insert(pair<char,char>('w','D')),m1.insert(pair<char,char>('x','C'));
             m1.insert(pair<char,char>('y','B')),m1.insert(pair<char,char>('z','A')),m1.insert(pair<char,char>(' ','*'));
@@ -90,6 +97,8 @@ void solve(){
     Substitution s;
     s.getData();
     cout << endl;
+    s.encrypt(),s.showCT();
+    s.decrypt(),s.showPT();
     cout << endl;
 }
 int main()

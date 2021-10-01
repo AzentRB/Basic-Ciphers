@@ -1,4 +1,13 @@
 #pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize("unroll-loops")
+#include <bits/stdc++.h> 
+#include <complex>
+#include <queue>
+#include <set>
+#include <unordered_set>
+#include <list>
+#include <chrono>
 #include <random>
 #include <iostream>
 #include <algorithm>
@@ -23,6 +32,9 @@ typedef vector<int> v32;
 typedef vector<vector<int> > vv32;
 typedef vector<vector<ll> > vv64;
 typedef vector<vector<p64> > vvp64;
+typedef vector<p64> vp64;
+typedef vector<p32> vp32;
+ll MOD = 998244353;
 double eps = 1e-12;
 #define forn(i,e) for(ll i = 0; i < e; i++)
 #define forsn(i,s,e) for(ll i = s; i < e; i++)
@@ -46,6 +58,11 @@ void solve(){
 	cout << "Enter plaintxt : ";
 	cin >> plaintxt;
 	len = plaintxt.length();
+	cout << "Enter dimension of key: ";
+	cin >> m;
+	float key[max][max];
+	cout << "Enter elements of key: \n";
+	for(i=0;i<m;i++) for(j=0;j<m;j++) cin >> key[i][j];
 	cout << "\nKey: ";
 	for(i=0;i<m;i++){
 		for(j=0;j<m;j++) cout << key[i][j] << " ";
@@ -67,6 +84,8 @@ void solve(){
 	for(i=0;i<m;i++){
 		for(j=0;j<1;j++){
 			c[i][j]=0;
+			for (k=0;k<3;k++) c[i][j]+=key[i][k]*textkeyrix[k][j];
+			e[i][j]=c[i][j];
 			cout << c[i][j] << endl;
 		}
 	}
@@ -90,6 +109,7 @@ void solve(){
 	for(i = 0; i < m; i++){
         for(j = 0; j < m; j++){
             inv[i][j]=((key[(j+1)%3][(i+1)%3]*key[(j+2)%3][(i+2)%3])-(key[(j+1)%3][(i+2)%3]*key[(j+2)%3][(i+1)%3]))/det;
+            cout << inv[i][j] << " ";
         }
         cout << endl;
     }
@@ -105,6 +125,7 @@ void solve(){
 	cout << "Decrypted Text: ";
 	for(i=0;i<m;i++)
 		for(j=0;j<1;j++){
+            ch2=(int(d[i][j]))+97;
             cout << ch2;		
 		}
 }

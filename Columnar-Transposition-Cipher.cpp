@@ -13,6 +13,9 @@
 #include <algorithm>
 #include <cmath>
 #include <string>
+#include <vector>
+#include <map>
+#include <unordered_map>
 #include <stack>
 #include <iomanip>
 #include <fstream>
@@ -56,9 +59,12 @@ string enc(string lol, string key){
     char matrix[row][col];
     for(int i=0,k=0;i<row;i++)
         for(int j=0;j<col;){
+            if(lol[k]=='\0') matrix[i][j] = '_',j++;
+            if(isalpha(lol[k])||lol[k]==' ') matrix[i][j] = lol[k],j++;
             k++;
         }
     for(map<int,int>::iterator ii=keys.begin();ii!=keys.end();++ii){
+        j=ii->second;
         for(int i=0;i<row;i++) if(isalpha(matrix[i][j])||matrix[i][j]==' '||matrix[i][j]=='_') cipher+=matrix[i][j];
     }
     return cipher;
@@ -66,6 +72,8 @@ string enc(string lol, string key){
 string dec(string lol,string key){
     int col=key.length(),row=lol.length()/col;
     char matr[row][col];
+    for(int j=0,k=0;j<col;j++) for(int i=0;i<row;i++) matr[i][j]=lol[k++];
+    int ind=0;
     for(map<int, int>::iterator ii=keys.begin();ii!=keys.end();++ii) ii->second=ind++;
     char matrix[row][col];
     int k=0;
@@ -79,6 +87,7 @@ string dec(string lol,string key){
 }
 void solve(){
     string msg="this is my laptop",key="MALHR";
+    set_fun(key);
     string temp=enc(msg, key);
     cout << "Encrypted: " << enc(msg, key) << endl << "Decrypted: " << dec(temp,key) << endl;
 }
